@@ -1,0 +1,29 @@
+/**********************************
+			Global Styles
+***********************************/
+
+body {
+	background-color: lightseagreen;
+	color: ghostwhite;
+	box-sizing: border-box;
+}
+
+
+/**********************************
+			Title Styles
+***********************************/
+
+header {
+	text-align: center;
+}
+
+
+/**********************************
+			SVG Styles
+***********************************/
+
+.content {
+	text-align: center;
+	margin-top: 2em;
+}
+
