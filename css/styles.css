@@ -6,6 +6,7 @@ body {
 	background-color: lightseagreen;
 	color: ghostwhite;
 	box-sizing: border-box;
+	margin: 0;
 }
 
 
@@ -27,3 +28,13 @@ header {
 	margin-top: 2em;
 }
 
+
+/**********************************
+			D3 Styles
+***********************************/
+
+.axis path, .axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;  /* Round any decimal pixels so it'll render nicely */
+}

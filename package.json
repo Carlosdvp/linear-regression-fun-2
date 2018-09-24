@@ -6,7 +6,7 @@
   "scripts": {
     "start": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js' --directory --port 3333 --browser"
   },
-  "git repository": "",
+  "git repository": "https://github.com/Carlosdvp/linear-regression-fun-2",
   "author": "CDV",
   "license": "ISC",
   "devDependencies": {
