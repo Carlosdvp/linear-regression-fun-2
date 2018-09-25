@@ -25,7 +25,8 @@ header {
 
 .content {
 	text-align: center;
-	margin-top: 2em;
+	margin: 2em;
+	border: 1px solid ghostwhite;
 }
 
 
@@ -33,8 +34,6 @@ header {
 			D3 Styles
 ***********************************/
 
-.axis path, .axis line {
-  fill: none;
-  stroke: black;
-  shape-rendering: crispEdges;  /* Round any decimal pixels so it'll render nicely */
+.click-circle {
+  fill: burlywood;
 }
