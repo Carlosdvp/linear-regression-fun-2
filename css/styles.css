@@ -37,3 +37,9 @@ header {
 .click-circle {
   fill: burlywood;
 }
+
+path {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 3px;
+}
