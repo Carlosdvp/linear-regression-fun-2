@@ -35,7 +35,7 @@ const svg = d3
 //
 // a simpler way to draw the dots on the screen
 // This is the draw function
-//
+
 function drawCircle(x, y) {
   svg.append("circle")
     .attr('class', 'click-circle')
@@ -72,26 +72,30 @@ function drawCircle(x, y) {
 }
 
 
-
-
-
-
-
-
-
 // click on the screen draws a dot
 svg.on('click', function() {
   var coords = d3.mouse(this);
   drawCircle(coords[0], coords[1]);
 
   console.log(x_coords);
-  //
-  // Drawing the Line
 });
 
-
 //
-// TensorFlow JS
+// Drawing the Line
+svg.append("line")
+  .attr('class', 'the-line')
+  .attr('x1', 20)
+  .attr('y1', 20)
+  .attr('x2', 500)
+  .attr('y2', 500);
+
+
+/*
+
+    TensorFlow JS
+
+*/
+
 
 
 // the predict function
