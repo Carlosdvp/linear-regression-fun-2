@@ -29,3 +29,12 @@ The Formula for the line:
 
 		y = mx + b
 
+
+
+********************************************************************************************
+
+*app.js* - Combines making the dots, drawing the line with D3 and using Tensorflow to get the line to be drawn with the Tensor data. But it is not interactive, the dots and the line are independent of eachother.
+
+*appV2.js* - This oe uses a different method to draw the dots and the line and it uses math formulas to get the line to make it's predictions based on the data. Dots get the line to move.
+
+*appV3.js* - The goal here is to combine the TensorFlow functionality from app.js with the interactive dots and line from appV2.js

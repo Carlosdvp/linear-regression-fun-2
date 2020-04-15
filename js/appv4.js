@@ -12,6 +12,7 @@ const width = 810,
 let x_coords = [];
 let y_coords = [];
 
+let data = [];
 
 // define the svg and add it to the DOM
 const svg = d3
@@ -38,9 +39,11 @@ function drawCircle(x, y) {
   // lets push the Xs and Ys into their res[ective arrays
   y_coords.push(y);
   x_coords.push(x);
+  //data.push({"x": d3.mouse(this)[0], "y": d3.mouse(this)[1] });
+  data.push({"x": x, "y": y});
 
-  console.log(x, y);
   console.log(x_coords, y_coords);
+  console.log(data);
 }
 
 // click on the screen draws a dot
@@ -141,3 +144,77 @@ svg.append("line")
   .attr('y1', lineY[0])
   .attr('x2', width)
   .attr('y2', (lineY[1] * height));
+
+
+/*
+
+Math Helpers
+
+*/
+
+function generateData(numPoints, coeff) {
+  return tf.tidy(() => {
+    const [m, b] = [
+      tf.scalar(coeff.a), tf.scalar(coeff.b), tf.scalar(coeff.c),
+      tf.scalar(coeff.d)
+    ];
+
+    const xs = tf.randomUniform([numPoints], -1, 1);
+
+    // Generate polynomial data
+    const three = tf.scalar(3, 'int32');
+    const ys = a.mul(xs.pow(three))
+      .add(b.mul(xs.square()))
+      .add(c.mul(xs))
+      .add(d)
+      // Add random noise to the generated data
+      // to make the problem a bit more interesting
+      .add(tf.randomNormal([numPoints], 0, sigma));
+
+    // Normalize the y values to the range 0 to 1.
+    const ymin = ys.min();
+    const ymax = ys.max();
+    const yrange = ymax.sub(ymin);
+    const ysNormalized = ys.sub(ymin).div(yrange);
+
+    return {
+      xs, 
+      ys: ysNormalized
+    };
+  })
+}
+
+
+async function learnCoefficients() {
+  const trueCoefficients = {m: m, b: b};
+  const trainingData = generateData(100, trueCoefficients);
+
+
+
+  // See what the predictions look like with random coefficients
+  renderCoefficients('.the-line', {
+    m: m.dataSync()[0],
+    b: b.dataSync()[0]
+  });
+
+
+  // Train the model!
+  await train(trainingData.xs, trainingData.ys, numIterations);
+
+  // See what the final results predictions are after training.
+  renderCoefficients('#trained .coeff', {
+    a: a.dataSync()[0],
+    b: b.dataSync()[0],
+    c: c.dataSync()[0],
+    d: d.dataSync()[0],
+  });
+  const predictionsAfter = predict(trainingData.xs);
+  await plotDataAndPredictions(
+      '#trained .plot', trainingData.xs, trainingData.ys, predictionsAfter);
+
+  predictionsBefore.dispose();
+  predictionsAfter.dispose();
+}
+
+
+learnCoefficients();
